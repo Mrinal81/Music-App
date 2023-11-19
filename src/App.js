@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import VerifyOTP from './components/VerifyOtp';
 import SongsList from './components/SongsList';
@@ -20,7 +20,6 @@ const App = () => {
 
   const sendOTP = async (phoneNumber) => {
     try {
-      // Use the provided API endpoint for sending OTP
       console.log('API Endpoint:', process.env.REACT_APP_API_ENDPOINT);
 
       const response = await fetch(
@@ -56,7 +55,6 @@ const App = () => {
 
   const verifyOTP = async (otp, requestId) => {
     try {
-      // Use the provided API endpoint for verifying OTP
       if (!requestId) {
         console.error('No requestId available. VerifyOTP cannot proceed.');
         return { success: false, error: 'No requestId available.' };
@@ -69,8 +67,8 @@ const App = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            phoneNumber: process.env.REACT_APP_USER_ID, // Use the phoneNumber parameter
-            requestId: requestId, // Use the requestId received from sendOTP
+            phoneNumber: process.env.REACT_APP_USER_ID,
+            requestId: requestId,
             otp: otp,
           }),
         }
@@ -89,7 +87,7 @@ const App = () => {
       //   alert('Incorrect OTP. Please try again.');
       // }
 
-      return data; // Return the response object
+      return data;
     } catch (error) {
       console.error('Error verifying OTP:', error);
       return { success: false, error: 'An error occurred while verifying OTP.' };

@@ -29,9 +29,9 @@ const MusicList = ({ songs, onAddSong, onPrev, onNext, setCurrentSong }) => {
     setCurrentMusic(null);
   };
 
-  const handleAddSong = (newSong) => {
-    onAddSong(newSong);
-  };
+  // const handleAddSong = (newSong) => {
+  //   onAddSong(newSong);
+  // };
 
   useEffect(() => {
     setCurrentIndex(null);

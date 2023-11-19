@@ -8,9 +8,9 @@ const navigate = useNavigate();
 
 
 
-    const handlePhoneNumberChange = (e) => {
-      setPhoneNumber(e.target.value);
-    };
+    // const handlePhoneNumberChange = (e) => {
+    //   setPhoneNumber(e.target.value);
+    // };
   
     const handleSendOTP = async () => {
         if (!phoneNumber) {
@@ -23,7 +23,6 @@ const navigate = useNavigate();
           navigate('/verify-otp'); 
         } catch (error) {
           console.error('Error sending OTP:', error);
-          // TODO: Handle the error, show error message
         }
       };
 

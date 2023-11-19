@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CustomPlayer = ({ currentSong, audioRef, onSongEnd, onPrev, onNext }) => {
   const [isPlaying, setIsPlaying] = useState(false);
