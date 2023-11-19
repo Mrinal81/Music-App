@@ -1,13 +1,319 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+
+
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+
+}
+.login{
+    display: flex;
+    justify-content: center;
+}
+.container{
+    height: 400px;
+    padding: 20px;
+    margin-top: 250px;
+}
+.form{
+    padding: 15px;
+}
+.form h2{
+    font-size: 35px;
+    color: #4c2372;
+}
+.form p{
+    padding-top: 20px;
+    font-size: 15px;
+}
+.form input{
+    margin-top: 25px;
+    width: 100%;
+    border-radius: 10px;
+    height: 60px;
+    border: .5px solid gray;
+    outline: none;
+    padding-left: 25px;
+    font-size: 15px;
+}
+.btn{
+    margin-top: 20px;
+}
+.button{
+    background-color: #552583;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+::placeholder{
+    font-size: 18px;
+    
+}
+.verifyOTP{
+    display: flex;
+    justify-content: center;
+}
+.otp{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+}
+.otp input{
+    width: 70px;
+    height: 70px;
+    margin: 25px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.logo{
+    height: 100%;
+    width: 350px;
+    background-color: white;
+    position: absolute;
+    text-align: center;
+    color:#4c2372 ;
+    border-right: 0.1px solid rgb(234, 232, 232);
+}
+.logout{
+    position: relative;
+    top: 200px;
+}
+.logout button{
+    padding: 15px;
+    background-color:#fdb927 ;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.logo h1{
+    margin-top: 50px;
+}
+.topNavbar{
+    display: flex;
+    justify-content: space-around;
+    height: 100px;
+    width: 76%;
+    align-items: center;
+    position: relative;
+    left: 350px;
+    border-bottom: 0.1px solid rgb(234, 232, 232);
+}
+.addbtn{
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: #fdb927;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+.subnavbar{
+    height: 80px;
+    width: 76%;
+    position: relative;
+    left: 350px;
+    border-bottom: 0.1px solid rgb(234, 232, 232);
+    align-items: center;
+    font-weight: bold;
+    display:flex;
+    
+}
+.items{
+    width: 60%;
+    margin-left: 10px;
+}
+.subnavbar ul{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+.subnavbar ul li{
+    padding: 30px 20px;
+}
+.one{
+    position: relative;
+    left: 60px;
+}
+.three{
+    position: relative;
+    left: -70px;
+}
+.two{
+    position: relative;
+    left: -10px;
+
+}
+.songslist{
+    height: 60vh;
+    width: 76%;
+    position: absolute;
+    left: 350px;
+}
+
+.songslist .music-card{
+    display: flex;
+    justify-content:space-between;
+    padding: 30px;
+    border-bottom: 0.1px solid rgb(234, 232, 232);
+}
+.songslist .music-card div{
+    width: 100%;
+    text-align: center;
+}
+.songslist .music-card div h2{
+    font-size: 15px;
+}
+.play{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.playbtn{
+    width: 40px;
+    height: 40px;
+}
+.bin{
+    font-size: 20px;
+}
+.image{
+    width: 50px;
+    height: 50px;
+}
+.img{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.modal {
+    position: fixed;
+    border: 1px solid gray;
+    background-color: whitesmoke;
+    top: 50%; /* Keep this value */
+    left: 50%; /* Keep this value */
+    transform: translate(-50%, -50%);
+    height: 560px;
+    width: 500px;
+    border-radius: 20px;
+    z-index: 999;
+}
+.modal-header{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.close{
+    /* padding-top: 15px; */
+    /* margin-left: 50px; */
+    position: absolute;
+    font-size: 25px;
+    right: 30px;
+    cursor: pointer;
+}   
+.modal-content div{
+    margin: 20px 50px;
+}  
+  .modal h2 {
+    text-align: center;
+    padding-top: 10px;
+  }
+  
+  .modal div {
+    padding: 5px 5px;
+  }
+  
+  .modal label {
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+  }
+  
+  .modal input {
+    width: 90%;
+    padding: 5px;
+    border-radius: 8px;
+    outline: none;
+    background-color: rgb(219, 219, 219);
+    border: 0.5px solid lightgray;
+  }
+  
+  .modalbtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .modal button {
+    padding: 10px;
+    background-color: #fdb927;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 50px 70px;
+  }
+  
+  
+  
+.user-img{
+    background-color: transparent !important;
+    border: none !important;
+    
+}
+.custom-player{
+    background-color: whitesmoke;
+    /* border-radius: 10px; */
+    padding-top: 20px;
+}
+.img-name{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* padding-top: 20px; */
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 50px;
+    padding-bottom: 40px;
+}
+.control{
+    padding-right: 80px;
+}
+.progress-bar{
+    padding: 10px 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+progress{
+    width: 90%;
+}
+.play-pause-btn{
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.prev-btn{
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.next-btn{
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }

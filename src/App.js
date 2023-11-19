@@ -1,25 +1,122 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter, Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import Login from './components/Login';
+import VerifyOTP from './components/VerifyOtp';
+import SongsList from './components/SongsList';
+import NowPlayingBar from './components/NowPlaying';
 
-function App() {
+
+
+
+
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userToken, setUserToken] = useState(null);
+  const [requestId, setRequestId] = useState(null);
+  const [currentSong, setCurrentSong] = useState(null);
+
+
+
+
+  const sendOTP = async (phoneNumber) => {
+    try {
+      // Use the provided API endpoint for sending OTP
+      console.log('API Endpoint:', process.env.REACT_APP_API_ENDPOINT);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_ENDPOINT}/auth/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            phoneNumber: phoneNumber,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log('Response from sending OTP:', data);
+
+      // Check if the request was successful (you may need to adjust this based on your API response)
+      if (response.ok) {
+        // Extract the requestId from the response data
+        const requestId = data.requestId;
+        setRequestId(requestId);
+
+      } else {
+        console.error('Error sending OTP:', data.error);
+      }
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+    }
+  };
+
+
+  const verifyOTP = async (otp, requestId) => {
+    try {
+      // Use the provided API endpoint for verifying OTP
+      if (!requestId) {
+        console.error('No requestId available. VerifyOTP cannot proceed.');
+        return { success: false, error: 'No requestId available.' };
+      }
+      const response = await fetch(
+        `${process.env.REACT_APP_API_ENDPOINT}/auth/verify_otp`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            phoneNumber: process.env.REACT_APP_USER_ID, // Use the phoneNumber parameter
+            requestId: requestId, // Use the requestId received from sendOTP
+            otp: otp,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log('Response from OTP verification:', data);
+
+      if (data.success) {
+        console.log('OTP verification successful');
+        setUserToken(data.token);
+        setLoggedIn(true);
+        Navigate('/song-list');
+      }
+      // else {
+      //   alert('Incorrect OTP. Please try again.');
+      // }
+
+      return data; // Return the response object
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      return { success: false, error: 'An error occurred while verifying OTP.' };
+    }
+  };
+
+
+
+  const onLogout = () => {
+    setUserToken(null);
+    setLoggedIn(false);
+    return <Navigate to="/login" />;
+  };
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login sendOTP={sendOTP} />} />
+        <Route path="/verify-otp" element={<VerifyOTP verifyOTP={verifyOTP} setUserToken={setUserToken} setLoggedIn={setLoggedIn} requestId={requestId} loggedIn={loggedIn} />} />
+        <Route path="/song-list" element={<SongsList setCurrentSong={setCurrentSong} onLogout={onLogout} />} />
+      </Routes>
+      {currentSong && <NowPlayingBar currentSong={currentSong} />}
+
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
